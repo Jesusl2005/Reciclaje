@@ -1,4 +1,5 @@
 import random
+# Funcion ingreso de botellas que ejecuta los valores de las botellas y las guarda para calcular el valor de la comsision
 def ingreso_botellas():
     print('Cuantas botellas va a ingresar?')
     botellas = input('> ')
@@ -23,10 +24,12 @@ def ingreso_botellas():
     else:
         print('Devolviendo el material ingresado')
         return saldo == 0
-            
+    
+# Funcion de consulta de saldo, que muestra todos las comisiones de las botellas acreditadas            
 def consultar_saldo(saldototal):
     print(f'Su saldo actual en la cuenta es de ${saldototal:,.0f}')
-
+    
+# Funcion menu, que muestra las opciones que tiene el usuario dentro del programa
 def menu():
     print('--- MENU PRINCIPAL ---')
     print('')

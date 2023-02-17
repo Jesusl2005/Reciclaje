@@ -1,12 +1,15 @@
+# Se importan los otros modulos del programa
 import ingreso, menu
 from os import system
+
+# Se inicializa el programa principal
 def run():
     system('cls')
     print("*"*35)
     print("BIENVENIDO A RECICLEMOS BOTELLAS")
     print("*"*35)
     print("")
-    
+    # Inicia el modulo de ingreso del usuario
     ingreso.ingresar()
     system("cls")
     print('')
@@ -14,6 +17,7 @@ def run():
     print('INGRESO EXITOSO')
     print('*'*25)
     print('')
+    # Inicia el modulo de opciones de menu principal
     eleccion = menu.menu()
     eleccion = int(eleccion)
     saldototal = 0
@@ -28,7 +32,7 @@ def run():
                 menu.consultar_saldo(saldototal)
         eleccion = menu.menu()
         eleccion = int(eleccion)
-
+    # Finaliza el programa
     print('*'*25)
     print('Sesion finalizada')
     print('*'*25)
