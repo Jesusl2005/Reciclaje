@@ -14,7 +14,9 @@ correcta haremos que una variable llamada Login sea verdadera.
 menú de opciones:
 
 o Ingresar botellas
+
 o Consultar saldo
+
 o Salir
 
 • Ingresar Botellas: Primero preguntaremos cuántas botellas se va a ingresar al sistema.
