@@ -24,9 +24,11 @@ cada botella. En cada ciclo del bucle se debe generar un número aleatorio entre
 ingresando botellas en la máquina). Una vez generado, según el peso del material,
 usaremos un condicional múltiple para asignarle un valor monetario:
 
-o Si es menos de 500 gr, corresponden $50
-o Si es entre 501 gr y 1500 gr, corresponden $125
-o Si es más de 1501 gr, corresponden $200
+o Si es menos de 500 gr, corresponden $50.
+
+o Si es entre 501 gr y 1500 gr, corresponden $125.
+
+o Si es más de 1501 gr, corresponden $200.
 
 Hecho esto, el programa debe informar al usuario por pantalla el valor que se le
 ofrece. Si el usuario acepta, lo acreditamos a su saldo, sino se debe devolver el
