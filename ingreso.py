@@ -1,25 +1,26 @@
 from os import system
+import PySimpleGUI as sg
 def ingresar():
-    intentos = 0
-    for i in range(3):
-        print('--- INGRESE EL USUARIO ---')
-        user = input('> ')
-        if user == 'Albus_D':
-            print('--- INGRESE LA CONTRASEÑA ---')
-            key = input('> ')
-            if key == 'caramelosDeLimon':
-                break
+    Layout2 = [
+    [sg.Text('INGRESE EL USUARIO')],
+    [sg.Input(key='user')],
+    [sg.Text('INGRESE LA CONTRASEÑA')],
+    [sg.Input(key='key', password_char='*')],
+    [sg.Button('Log in'), sg.Button('Exit')]
+    ]
+
+    window2 = sg.Window('Entrada', Layout2)
+    intentos = 3
+    while intentos != 0:
+        evento, valores = window2.read()
+        if evento == 'Log in' and valores['user'] == 'Albus_D' and valores['key'] == 'caramelosDeLimon':
+            sg.popup('INGRESO EXITOSO')
+            break
+        elif valores['user'] != 'Albus_D' or valores['key'] != 'carmelosDeLimon':
+            intentos = intentos-1
+            if intentos != 0:
+                sg.popup(f'Ingreso incorrecto, te quedan {intentos} intentos')
             else:
-                print('Contraseña incorrecta, intentelo nuevamente')
-                print(f'Te quedan {2-i} intentos')
-                print('')
-                system('cls')
-                intentos += 1
-        else:
-            print('Usuario incorrecto, intentelo nuevamente')
-            print(f'Te quedan {2-i} intentos')
-            print('')
-            intentos += 1
-    if intentos == 3:
-        print('Usuario bloqueado')
-        print('Sesion cerrada')
+                sg.popup('Sesion bloqueada')
+        elif evento == 'Exit':
+            window2.close()

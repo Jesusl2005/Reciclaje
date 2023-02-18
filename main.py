@@ -1,42 +1,40 @@
-# Se importan los otros modulos del programa
 import ingreso, menu
+import PySimpleGUI as sg
 from os import system
 
-# Se inicializa el programa principal
 def run():
-    system('cls')
-    print("*"*35)
-    print("BIENVENIDO A RECICLEMOS BOTELLAS")
-    print("*"*35)
-    print("")
-    # Inicia el modulo de ingreso del usuario
+    Layout1 = [
+        [sg.Text('BIENVENIDO A RECICLEMOS BOTELLAS')],
+        [sg.Button('INGRESAR'), sg.Button('CERRAR')]
+    ]
+
+    window1 = sg.Window('Maquina de reciclaje', Layout1)
+    while True:
+        evento, valores = window1.read()
+        if evento == "INGRESAR":
+            break
+        elif evento == "CERRAR" or evento == sg.WIN_CLOSED:
+            window1.Close()
+            exit()
+    
     ingreso.ingresar()
-    system("cls")
-    print('')
-    print('*'*25)
-    print('INGRESO EXITOSO')
-    print('*'*25)
-    print('')
-    # Inicia el modulo de opciones de menu principal
-    eleccion = menu.menu()
-    eleccion = int(eleccion)
+    Layout6 = [
+        [sg.Button('INGRESAR BOTELLAS')],
+        [sg.Button('CONSULTAR SALDO')],
+        [sg.Button('CERRAR SESION')]
+    ]
     saldototal = 0
-    while eleccion !=3:
-        if eleccion == 1:
-            system('cls')
-            saldo = menu.ingreso_botellas()
-            saldototal = saldototal + saldo
-        else: 
-            if eleccion == 2:
-                system('cls')
-                menu.consultar_saldo(saldototal)
-        eleccion = menu.menu()
-        eleccion = int(eleccion)
-    # Finaliza el programa
-    print('*'*25)
-    print('Sesion finalizada')
-    print('*'*25)
-           
+    window6 = sg.Window('MENU PRINCIPAL', Layout6)
+    while True:
+        evento4,valores4 = window6.read()
+        if evento4 == 'INGRESAR BOTELLAS':
+           saldo = menu.ingreso_botellas()
+           saldototal = saldototal + saldo
+        elif evento4 == 'CONSULTAR SALDO':
+            menu.consultar_saldo(saldototal)
+        elif evento4 == 'CERRAR SESION':
+            sg.popup('SESION FINALIZADA')
+            exit()
 if __name__ == '__main__':
     run()
     

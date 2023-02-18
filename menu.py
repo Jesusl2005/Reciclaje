@@ -1,40 +1,61 @@
-import random
+import PySimpleGUI as sg
 # Funcion ingreso de botellas que ejecuta los valores de las botellas y las guarda para calcular el valor de la comsision
 def ingreso_botellas():
-    print('Cuantas botellas va a ingresar?')
-    botellas = input('> ')
-    botellas = int(botellas)
-    saldo = 0
-    for i in range(botellas):
-        peso = random.randrange(100,3000)
-        print(f'El peso de la botella es de {peso} gr')
-        if peso <= 500:
-            saldo = saldo + 50
-        else:
-            if peso > 1500:
-                saldo = saldo + 200
+    Layout3 = [
+        [sg.Text('Ingrese la cantidad de botellas a cotizar')],
+        [sg.Input(key='botellas')],
+        [sg.Button('Cotizar')]
+    ]
+    Layout4 = [
+        [sg.Text(f'Ingrese el peso de la botella'), sg.Text('1', key='cont')],
+        [sg.Input(key='peso')],
+        [sg.Button('Agregar')]
+    ]
+
+    window3 = sg.Window('Ingreso botellas', Layout3)
+    while True:
+        evento, valores = window3.read()
+        if evento == 'Cotizar':
+            botellas = valores['botellas']
+            botellas = int(botellas)
+            window4 = sg.Window('Ingreso botella', Layout4)
+            saldobotellas = 0
+            cont = 1
+            for i in range(botellas):
+                evento2, valores2 = window4.read()
+                pesobotella = valores2['peso']
+                pesobotella = int(pesobotella)
+                window4['peso'].update('')
+                if pesobotella <= 500:
+                    saldobotellas = saldobotellas + 50
+                elif pesobotella > 1500:
+                    saldobotellas = saldobotellas + 200
+                else:
+                    saldobotellas = saldobotellas + 125
+                cont += 1
+                window4['cont'].update(cont)
+            Layout5 = [
+                [sg.Text(f'El saldo total es de ${saldobotellas:,.0f}')],
+                [sg.Text('Desea acreditar el saldo?')],
+                [sg.Button('Si'), sg.Button('No')]
+            ]
+
+            window5 = sg.Window('Ingreso Botellas', Layout5)
+            evento3, valores3 = window5.read()
+            if evento3 == 'Si':
+                sg.popup('Saldo acreditado exitosamente')
+                window3.close()
+                window4.close()
+                window5.close()
+                return saldobotellas
             else:
-                saldo = saldo + 125
-    print(f'El saldo total es de ${saldo:,.0f}, desea acreditarlo?')
-    print('si/no')
-    acreditar = input('> ')
-    if acreditar.lower() == 'si':
-        print('Su saldo ha sido acreditado exitosamente')
-        return saldo
-    else:
-        print('Devolviendo el material ingresado')
-        return saldo == 0
+                sg.popup('Devolucion de las botellas procesada exitosamente')
+                window3.close()
+                window4.close()
+                window5.close()
+                saldobotellas = 0
+                return saldobotellas
     
 # Funcion de consulta de saldo, que muestra todos las comisiones de las botellas acreditadas            
 def consultar_saldo(saldototal):
-    print(f'Su saldo actual en la cuenta es de ${saldototal:,.0f}')
-    
-# Funcion menu, que muestra las opciones que tiene el usuario dentro del programa
-def menu():
-    print('--- MENU PRINCIPAL ---')
-    print('')
-    print('1- Ingresar botellas')
-    print('2- Consultar saldo')
-    print('3- Cerrar sesion')
-    eleccion = input('> ')
-    return eleccion
+    sg.popup(f'El saldo total acreditado a la cuenta es: ${saldototal:,.0f}')
