@@ -11,16 +11,21 @@ def ingresar():
 
     window2 = sg.Window('Entrada', Layout2)
     intentos = 3
-    while intentos != 0:
+    salir = 1
+    while intentos != 0 and salir != 0:
         evento, valores = window2.read()
-        if evento == 'Log in' and valores['user'] == 'Albus_D' and valores['key'] == 'caramelosDeLimon':
+        if evento == 'Exit' or evento == sg.WIN_CLOSED:
+            salir = 0
+        elif evento == 'Log in' and valores['user'] == 'Albus_D' and valores['key'] == 'caramelosDeLimon':
             sg.popup('INGRESO EXITOSO')
             break
-        elif valores['user'] != 'Albus_D' or valores['key'] != 'carmelosDeLimon':
+        elif (valores['user'] != 'Albus_D' or valores['key'] != 'carmelosDeLimon'):
             intentos = intentos-1
             if intentos != 0:
                 sg.popup(f'Ingreso incorrecto, te quedan {intentos} intentos')
             else:
                 sg.popup('Sesion bloqueada')
-        elif evento == 'Exit':
-            window2.close()
+                salir = 0
+    window2.close()
+    return salir
+            

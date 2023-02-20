@@ -12,12 +12,16 @@ def run():
     while True:
         evento, valores = window1.read()
         if evento == "INGRESAR":
+            window1.close()
             break
         elif evento == "CERRAR" or evento == sg.WIN_CLOSED:
             window1.Close()
             exit()
     
-    ingreso.ingresar()
+    salir = ingreso.ingresar()
+    if salir == 0:
+        exit()
+
     Layout6 = [
         [sg.Button('INGRESAR BOTELLAS')],
         [sg.Button('CONSULTAR SALDO')],
@@ -32,7 +36,7 @@ def run():
            saldototal = saldototal + saldo
         elif evento4 == 'CONSULTAR SALDO':
             menu.consultar_saldo(saldototal)
-        elif evento4 == 'CERRAR SESION':
+        elif evento4 == 'CERRAR SESION' or evento4 == sg.WIN_CLOSED:
             sg.popup('SESION FINALIZADA')
             exit()
 if __name__ == '__main__':

@@ -14,15 +14,25 @@ def ingreso_botellas():
 
     window3 = sg.Window('Ingreso botellas', Layout3)
     while True:
+        ev = 0
         evento, valores = window3.read()
+        if evento == sg.WIN_CLOSED:
+            window3.close()
+            ev = 1
         if evento == 'Cotizar':
             botellas = valores['botellas']
             botellas = int(botellas)
             window4 = sg.Window('Ingreso botella', Layout4)
             saldobotellas = 0
             cont = 1
+            
             for i in range(botellas):
                 evento2, valores2 = window4.read()
+                
+                if evento2 == sg.WIN_CLOSED:
+                    window4.close()
+                    ev = 1
+                    break
                 pesobotella = valores2['peso']
                 pesobotella = int(pesobotella)
                 window4['peso'].update('')
@@ -34,12 +44,13 @@ def ingreso_botellas():
                     saldobotellas = saldobotellas + 125
                 cont += 1
                 window4['cont'].update(cont)
+            if ev == 1:
+                break
             Layout5 = [
                 [sg.Text(f'El saldo total es de ${saldobotellas:,.0f}')],
                 [sg.Text('Desea acreditar el saldo?')],
                 [sg.Button('Si'), sg.Button('No')]
             ]
-
             window5 = sg.Window('Ingreso Botellas', Layout5)
             evento3, valores3 = window5.read()
             if evento3 == 'Si':
@@ -48,7 +59,7 @@ def ingreso_botellas():
                 window4.close()
                 window5.close()
                 return saldobotellas
-            else:
+            elif evento3 == 'No' or evento3 ==  sg.WIN_CLOSED:
                 sg.popup('Devolucion de las botellas procesada exitosamente')
                 window3.close()
                 window4.close()
