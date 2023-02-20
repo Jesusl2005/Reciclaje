@@ -8,7 +8,7 @@ def run():
         [sg.Button('INGRESAR'), sg.Button('CERRAR')]
     ]
 
-    window1 = sg.Window('Maquina de reciclaje', Layout1)
+    window1 = sg.Window('Maquina de reciclaje', Layout1, element_justification='center')
     while True:
         evento, valores = window1.read()
         if evento == "INGRESAR":

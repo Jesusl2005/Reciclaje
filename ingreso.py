@@ -9,7 +9,7 @@ def ingresar():
     [sg.Button('Log in'), sg.Button('Exit')]
     ]
 
-    window2 = sg.Window('Entrada', Layout2)
+    window2 = sg.Window('Entrada', Layout2, element_justification='center')
     intentos = 3
     salir = 1
     while intentos != 0 and salir != 0:
